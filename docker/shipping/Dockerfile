@@ -3,6 +3,7 @@ FROM weaveworksdemos/msd-java:jre-latest
 WORKDIR /usr/src/app
 COPY *.jar ./
 COPY sltoken.txt ./sltoken.txt
+COPY java_container.sh ./java_container.sh
 
 USER ${SERVICE_USER}
 
@@ -20,7 +21,6 @@ LABEL org.label-schema.vendor="Weaveworks" \
   org.label-schema.vcs-ref="${COMMIT}" \
   org.label-schema.schema-version="1.0"
 
-RUN wget --no-check-certificate https://agents.sealights.co/scripts/java_container.sh
 RUN java_container.sh
 ENV JAVA_TOOL_OPTIONS="-javaagent:sl-test-listener.jar -Dsl.tags=script,container -Dsl.labId=integ_myapp_test"
 
