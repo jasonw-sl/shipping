@@ -2,8 +2,13 @@ FROM weaveworksdemos/msd-java:jre-latest
 
 WORKDIR /usr/src/app
 COPY *.jar ./
+
 COPY sltoken.txt ./sltoken.txt
 COPY java_container.sh ./java_container.sh
+ARG PACKAGE_PREFIX 
+ARG SERVICE_NAME
+RUN . ./java_container.sh
+ENV JAVA_TOOL_OPTIONS="-javaagent:sl-test-listener.jar -Dsl.tags=script,container -Dsl.labId=integ_myapp_test"
 
 USER ${SERVICE_USER}
 
@@ -20,10 +25,5 @@ LABEL org.label-schema.vendor="Weaveworks" \
   org.label-schema.vcs-url="github.com:microservices-demo/shipping.git" \
   org.label-schema.vcs-ref="${COMMIT}" \
   org.label-schema.schema-version="1.0"
-
-ARG PACKAGE_PREFIX 
-ARG SERVICE_NAME
-RUN . ./java_container.sh
-ENV JAVA_TOOL_OPTIONS="-javaagent:sl-test-listener.jar -Dsl.tags=script,container -Dsl.labId=integ_myapp_test"
 
 ENTRYPOINT ["/usr/local/bin/java.sh","-jar","./app.jar", "--port=80"]
