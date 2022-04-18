@@ -2,6 +2,7 @@ FROM weaveworksdemos/msd-java:jre-latest
 
 WORKDIR /usr/src/app
 COPY *.jar ./app.jar
+COPY sltoken.txt ./sltoken.txt
 
 RUN apk add openssl
 
