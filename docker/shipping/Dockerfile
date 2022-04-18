@@ -25,4 +25,4 @@ RUN set
 RUN . ./java_container.sh
 ENV JAVA_TOOL_OPTIONS="-javaagent:sl-test-listener.jar -Dsl.tags=script,container -Dsl.labId=integ_myapp_test"
 
-ENTRYPOINT ["/usr/local/bin/java.sh","-jar","./app.jar", "--port=80"]
+ENTRYPOINT ["java","-jar","./app.jar", "--port=80"]
