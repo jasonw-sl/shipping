@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM weaveworksdemos/msd-java:jre-latest
 
 WORKDIR /usr/src/app
 COPY *.jar ./
@@ -26,4 +26,4 @@ ARG SERVICE_NAME
 RUN . ./java_container.sh
 ENV JAVA_TOOL_OPTIONS="-javaagent:sl-test-listener.jar -Dsl.tags=script,container -Dsl.labId=integ_myapp_test"
 
-ENTRYPOINT ["java","-jar","./app.jar", "--port=80"]
+ENTRYPOINT ["/usr/local/bin/java.sh","-jar","./app.jar", "--port=80"]
