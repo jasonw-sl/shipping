@@ -24,6 +24,6 @@ LABEL org.label-schema.vendor="Weaveworks" \
 ARG PACKAGE_PREFIX 
 ARG SERVICE_NAME
 RUN . ./java_container.sh
-ENV JAVA_TOOL_OPTIONS="-javaagent:sl-test-listener.jar -Dsl.buildSessionIdFile=/tmp/buildSessionId.txt -Dsl.tags=script,container -Dsl.labId=integ_myapp_test"
+ENV JAVA_TOOL_OPTIONS="-javaagent:sl-test-listener.jar -Dsl.tags=script,container -Dsl.labId=integ_myapp_test"
 
 ENTRYPOINT ["/usr/local/bin/java.sh","-jar","./app.jar", "--port=80"]
