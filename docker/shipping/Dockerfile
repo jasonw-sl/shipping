@@ -4,8 +4,6 @@ WORKDIR /usr/src/app
 COPY *.jar ./
 COPY sltoken.txt ./sltoken.txt
 
-RUN apk add openssl
-
 USER ${SERVICE_USER}
 
 ARG BUILD_DATE
