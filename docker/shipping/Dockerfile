@@ -3,6 +3,8 @@ FROM weaveworksdemos/msd-java:jre-latest
 WORKDIR /usr/src/app
 COPY *.jar ./app.jar
 
+RUN apk add openssl
+
 RUN	chown -R ${SERVICE_USER}:${SERVICE_GROUP} ./app.jar
 
 USER ${SERVICE_USER}
