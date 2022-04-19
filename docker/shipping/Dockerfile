@@ -1,14 +1,9 @@
 FROM weaveworksdemos/msd-java:jre-latest
 
 WORKDIR /usr/src/app
-COPY *.jar ./
+COPY *.jar ./app.jar
 
-COPY sltoken.txt ./sltoken.txt
-COPY java_container.sh ./java_container.sh
-ARG PACKAGE_PREFIX 
-ARG SERVICE_NAME
-RUN . ./java_container.sh
-ENV JAVA_TOOL_OPTIONS="-javaagent:sl-test-listener.jar -Dsl.buildSessionIdFile=buildSessionId.txt -Dsl.tags=script,container -Dsl.labId=integ_myapp_test"
+RUN	chown -R ${SERVICE_USER}:${SERVICE_GROUP} ./app.jar
 
 USER ${SERVICE_USER}
 
